@@ -22,9 +22,9 @@ async def on_message(message):
                     try:
                         msg = message.content[4:]
                         if message.author.id == 560330444428673026:
-                            embed=discord.Embed(colour=0xFF0000, timestamp=message.created_at, title="H O O N 공식 공지")
-                            embed.add_field(name="H O O N SHOP", value=msg, inline=True)
-                            embed.set_footer(text=f"오늘도 좋은하루 보내세요")
+                            embed=discord.Embed(colour=0xFF0000, timestamp=message.created_at, title="초고퀄 최저가 프사샵")
+                            embed.add_field(name="전체공지", value=msg, inline=True)
+                            embed.set_footer(text=f"부담없이 문의주세용!")
                             await i.send(embed=embed)
                     except:
                         pass
@@ -46,7 +46,7 @@ async def on_message(message):
 
     if message.content == '!배너문의':
             embed=discord.Embed(title='배너문의', color=0x64FE2E, timestamp=message.created_at)
-            embed.add_field(name="배너문의", value=f'Hoon#8896', inline=True)
+            embed.add_field(name="배너문의", value=f'OOOP!#2036', inline=True)
             embed.set_footer(text=client.user.name, icon_url=client.user.avatar_url)
             await message.channel.send(embed=embed)       
     
@@ -62,7 +62,7 @@ async def my_background_task():
         game = discord.Game("!배너문의")
         await client.change_presence(status=discord.Status.online, activity=game)
         await asyncio.sleep(2)
-        game = discord.Game("Hoon shop 둘러보는중")
+        game = discord.Game("초고퀄프사 제작중")
         await client.change_presence(status=discord.Status.online, activity=game)
         await asyncio.sleep(2)
         game = discord.Game(f'{len(client.guilds)}개의 서버에 참여중')
