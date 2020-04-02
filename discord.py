@@ -1,6 +1,7 @@
 import discord
 import asyncio
 import datetime
+import os
 
 client = discord.Client()
 
@@ -71,6 +72,7 @@ async def my_background_task():
         await client.change_presence(status=discord.Status.online, activity=game)
         await asyncio.sleep(2)
 
-client.loop.create_task(my_background_task())
 
-client.run('NjkxMjIxNDM3MDMzMzQ5MTUw.XoXh2w.5Aj4NdHkWAyCcx3VWTj37rQ_3Dk')
+client.loop.create_task(my_background_task())
+access_token = os.environ["NjkxMjIxNDM3MDMzMzQ5MTUw.XoXh2w.5Aj4NdHkWAyCcx3VWTj37rQ_3Dk"}
+client.run(access_token)
