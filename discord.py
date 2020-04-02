@@ -72,7 +72,8 @@ async def my_background_task():
         await client.change_presence(status=discord.Status.online, activity=game)
         await asyncio.sleep(2)
 
-
+access_token = os.environ["BOT_TOKEN"]
+        
 client.loop.create_task(my_background_task())
-access_token = os.environ["BOT_TOKEN"}
+
 client.run(access_token)
