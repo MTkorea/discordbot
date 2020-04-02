@@ -74,5 +74,5 @@ async def my_background_task():
 
 
 client.loop.create_task(my_background_task())
-access_token = os.environ["NjkxMjIxNDM3MDMzMzQ5MTUw.XoXh2w.5Aj4NdHkWAyCcx3VWTj37rQ_3Dk"}
+access_token = os.environ["BOT_TOKEN"}
 client.run(access_token)
