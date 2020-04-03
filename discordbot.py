@@ -52,13 +52,6 @@ async def on_message(message):
             embed.set_footer(text=client.user.name, icon_url=client.user.avatar_url)
             await message.channel.send(embed=embed)
             
-    if message.content == '도움말':
-            embed=discord.Embed(title='배너문의', color=0x0170ed, timestamp=message.created_at)
-            embed.add_field(value=f'안녕하세요', inline=True)
-            embed.add_field(value=f'안녕하세요2', inline=True)
-            embed.set_footer(text=client.user.name, icon_url=client.user.avatar_url)
-            await message.channel.send(embed=embed)
-            
     if message.content == '!디스코드':
             embed=discord.Embed(title='Discord', color=0x0170ed, timestamp=message.created_at)
             embed.add_field(name="디스코드 주소", value=f'https://discord.gg/t5tZUUg', inline=True)
