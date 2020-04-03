@@ -1,5 +1,6 @@
 import discord
 import asyncio
+import time
 import datetime
 import os
 
@@ -29,11 +30,12 @@ async def on_message(message):
                     except:
                         pass
 
-    if message.content.startswith("!서버리스트"):
-        list = []
-        for server in client.servers:
-            list.append(server.name)
-        await  client.send_message(message.channel, "\n".join(list))               
+    if message.content.startswith('+현재시각'):
+        t = t = datetime.datetime.now()
+        h = str(t.hour)
+        m = str(t.minute)
+        s = str(t.second)
+        await client.send_message(message.channel, '지금 시각은 **' + h + ':' + m + ':' + s + '**(이)입니다.')
                     
     if message.content.startswith("!삭제"):
         await message.channel.purge(limit=100)
