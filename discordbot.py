@@ -1,5 +1,6 @@
 import discord
 import asyncio
+import random
 import time
 import datetime
 import os
@@ -29,14 +30,22 @@ async def on_message(message):
                             await i.send(embed=embed)
                     except:
                         pass
-
-    if message.content.startswith('+현재시각'):
-        t = t = datetime.datetime.now()
-        h = str(t.hour)
-        m = str(t.minute)
-        s = str(t.second)
-        await client.send_message(message.channel, '지금 시각은 **' + h + ':' + m + ':' + s + '**(이)입니다.')
                     
+    if message.content.startswith('+할까 말까'):
+        randomNum = random.randrange(1, 3)
+        if randomNum==1:
+            await client.send_message(message.channel, embed=discord.Embed(title="하세요!", color=discord.Color.blue()))
+        else:
+            await client.send_message(message.channel, embed=discord.Embed(title="하지마세요;", color=discord.Color.red()))
+
+    if message.content.startswith('+핑'):
+        before = time.monotonic()
+        msg = await client.send_message(message.channel, ':ping_pong: 퐁!')
+        ping = (time.monotonic() - before) * 1000
+        text = ":ping_pong: 퐁!  {0}ms ".format((round(ping, 1)))
+        await client.edit_message(msg, text)
+        print(text)
+            
     if message.content.startswith("!삭제"):
         await message.channel.purge(limit=100)
         await message.channel.send('메세지 100개 가삭제되었습니다.')
