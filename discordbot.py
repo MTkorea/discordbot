@@ -14,6 +14,23 @@ async def on_ready():
     print(client.user.name)
     print('=====================================')
 
+@client.event
+async def on_message(message):
+    if message.content.startswith('!공지'):
+            for i in message.guild.members:
+                if i.bot == True:
+                    pass
+                else:
+                    try:
+                        msg = message.content[4:]
+                        if message.author.id == 560330444428673026:
+                            embed=discord.Embed(colour=0xFF0000, timestamp=message.created_at, title="초고퀄 최저가 프사샵")
+                            embed.add_field(name="전체공지", value=msg, inline=True)
+                            embed.set_footer(text=f"부담없이 문의주세용!")
+                            await i.send(embed=embed)
+                    except:
+                        pass
+            
     if message.content.startswith("+help"):
         channel = message.channel
         embed = discord.Embed(
@@ -330,23 +347,6 @@ async def on_ready():
             await client.send_message(message.channel, embed=discord.Embed(description=':game_die: ' + ':five:'))
         if randomNum ==6:
             await client.send_message(message.channel, embed=discord.Embed(description=':game_die: ' + ':six: '))
-    
-@client.event
-async def on_message(message):
-    if message.content.startswith('!공지'):
-            for i in message.guild.members:
-                if i.bot == True:
-                    pass
-                else:
-                    try:
-                        msg = message.content[4:]
-                        if message.author.id == 560330444428673026:
-                            embed=discord.Embed(colour=0xFF0000, timestamp=message.created_at, title="초고퀄 최저가 프사샵")
-                            embed.add_field(name="전체공지", value=msg, inline=True)
-                            embed.set_footer(text=f"부담없이 문의주세용!")
-                            await i.send(embed=embed)
-                    except:
-                        pass
             
     if message.content.startswith("!삭제"):
         await message.channel.purge(limit=100)
