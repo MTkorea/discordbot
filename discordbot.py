@@ -12,17 +12,6 @@ async def on_ready():
     print(client.user.name)
     print('=====================================')
     
-    
-@client.event
-async def on_message(message):
-    global pollRunning, pollNo, pollYes, realPoll, pollTitle, voted
-
-    if message.content.startswith("+서버리스트"):
-        list = []
-        for server in client.servers:
-            list.append(server.name)
-        await  client.send_message(message.channel, "\n".join(list))
-    
 @client.event
 async def on_message(message):
     if message.content.startswith('!공지'):
@@ -40,6 +29,12 @@ async def on_message(message):
                     except:
                         pass
 
+    if message.content.startswith("+서버리스트"):
+        list = []
+        for server in client.servers:
+            list.append(server.name)
+        await  client.send_message(message.channel, "\n".join(list))               
+                    
     if message.content.startswith("!삭제"):
         await message.channel.purge(limit=100)
         await message.channel.send('메세지 100개 가삭제되었습니다.')
