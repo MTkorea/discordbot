@@ -30,21 +30,6 @@ async def on_message(message):
                             await i.send(embed=embed)
                     except:
                         pass
-                    
-    if message.content.startswith('+할까 말까'):
-        randomNum = random.randrange(1, 3)
-        if randomNum==1:
-            await client.send_message(message.channel, embed=discord.Embed(title="하세요!", color=discord.Color.blue()))
-        else:
-            await client.send_message(message.channel, embed=discord.Embed(title="하지마세요;", color=discord.Color.red()))
-
-    if message.content.startswith('+핑'):
-        before = time.monotonic()
-        msg = await client.send_message(message.channel, ':ping_pong: 퐁!')
-        ping = (time.monotonic() - before) * 1000
-        text = ":ping_pong: 퐁!  {0}ms ".format((round(ping, 1)))
-        await client.edit_message(msg, text)
-        print(text)
             
     if message.content.startswith("!삭제"):
         await message.channel.purge(limit=100)
@@ -66,7 +51,13 @@ async def on_message(message):
             embed.add_field(name="배너문의", value=f'OOOP!#2036', inline=True)
             embed.set_footer(text=client.user.name, icon_url=client.user.avatar_url)
             await message.channel.send(embed=embed)       
-    
+
+    if message.content == '!배너문의':
+            embed=discord.Embed(title='배너문의', color=0x64FE2E, timestamp=message.created_at)
+            embed.add_field(name="배너문의", value=f'OOOP!#2036', inline=True)
+            embed.set_footer(text=client.user.name, icon_url=client.user.avatar_url)
+            await message.channel.send(embed=embed)
+            
     if message.content == '!디스코드':
             embed=discord.Embed(title='Discord', color=0xFF00FF, timestamp=message.created_at)
             embed.add_field(name="디스코드 주소", value=f'https://discord.gg/t5tZUUg', inline=True)
