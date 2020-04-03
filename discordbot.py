@@ -29,7 +29,7 @@ async def on_message(message):
                     except:
                         pass
 
-    if message.content.startswith("+서버리스트"):
+    if message.content.startswith("!서버리스트"):
         list = []
         for server in client.servers:
             list.append(server.name)
