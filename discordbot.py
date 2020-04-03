@@ -5,13 +5,92 @@ import os
 
 client = discord.Client()
 
+channelsRunning = []
+pollYes = 0
+pollNo = 0
+voted = {}
+client = discord.Client()
+realPoll = None
+pollTitle = ''
+
+async def update_poll(realPoll, pollTitle, pollNo, pollYes):
+    await client.edit_message(realPoll, """
+                ```css
+                [투표] %s
+                [YES : %s ]  [NO : %s ]
+                예'를 투표하려면 '$y'를 입력하고, '아니오' 를 투표하려면 '$n' 을 입력하세요.
+                ```""" % (str(pollTitle), str(pollYes), str(pollNo)))
+
 @client.event
 async def on_ready():
     print("ready")
     print(client.user.id)
     print(client.user.name)
     print('=====================================')
- 
+    
+    
+@client.event
+async def on_message(message):
+    global pollRunning, pollNo, pollYes, realPoll, pollTitle, voted
+
+    if message.content.startswith("+서버리스트"):
+        list = []
+        for server in client.servers:
+            list.append(server.name)
+        await  client.send_message(message.channel, "\n".join(list))
+
+    if message.content.startswith("+투표"):
+        if (message.channel not in channelsRunning):
+            voted[message.channel] = []
+            channelsRunning.append(message.channel)
+            pollTitle = message.content[5:]
+            pollYes = 0
+            pollNo = 0
+            realPoll = await client.send_message(message.channel, """
+            ```css
+            [투표] %s
+            [YES : %s ]  [NO : %s ]
+            '예'를 투표하려면 '$y'를 입력하고, '아니오' 를 투표하려면 '$n' 을 입력하세요.
+            ```
+            """ % (str(pollTitle), str(pollYes), str(pollNo)))
+            await asyncio.sleep(300.0)
+            channelsRunning.remove(message.channel)
+            if (pollYes > pollNo):
+                await client.send_message(message.channel,
+                                          "과반수 (%s %s) 가 '그렇다'고 응답했다: %s." % (
+                                          str((pollYes / (pollYes + pollNo)) * 100), "%", str(pollTitle)))
+            elif (pollYes < pollNo):
+                await client.send_message(message.channel,
+                                          "과반수 (%s %s) 가 '아니오'라고 응답했다: %s." % (
+                                          str((pollNo / (pollYes + pollNo)) * 100), "%", str(pollTitle)))
+            else:
+                await client.send_message(message.channel, "투표, " + str(pollTitle) + ", 동점으로 끝났다")
+
+        else:
+            await client.send_message(message.channel,
+                                      "{0.author.mention} 새 투표가 시작될 때까지 기다리십시오.".format(
+                                          message))
+    # User Vote No
+    if (message.content.startswith("$n") or message.content.startswith("$N")):
+        if (message.channel in channelsRunning):
+            author = "{0.author.mention}".format(message)
+            if not author in voted[message.channel]:
+                voted[message.channel].append(author)
+                pollNo += 1
+                await update_poll(realPoll, pollTitle, pollNo, pollYes)
+            else:
+                await client.send_message(message.channel, "{0.author.mention} 이미 투표하셨잖아요.".format(message))
+    # User Vote Yes
+    if (message.content.startswith("$y") or message.content.startswith("$Y")):
+        if (message.channel in channelsRunning):
+            author = "{0.author.mention}".format(message)
+            if not author in voted[message.channel]:
+                voted[message.channel].append(author)
+                pollYes += 1
+                await update_poll(realPoll, pollTitle, pollNo, pollYes)
+            else:
+                await client.send_message(message.channel, "{0.author.mention} 이미 투표하셨잖아요.".format(message))
+    
 @client.event
 async def on_message(message):
     if message.content.startswith('!공지'):
