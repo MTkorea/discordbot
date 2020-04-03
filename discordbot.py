@@ -24,7 +24,7 @@ async def on_message(message):
                     try:
                         msg = message.content[4:]
                         if message.author.id == 560330444428673026:
-                            embed=discord.Embed(colour=0xFF0000, timestamp=message.created_at, title="초고퀄 최저가 프사샵")
+                            embed=discord.Embed(colour=0x0170ed, timestamp=message.created_at, title="초고퀄 최저가 프사샵")
                             embed.add_field(name="전체공지", value=msg, inline=True)
                             embed.set_footer(text=f"부담없이 문의주세용!")
                             await i.send(embed=embed)
@@ -38,7 +38,7 @@ async def on_message(message):
 
     if message.content.startswith("!내정보"):
         date = datetime.datetime.utcfromtimestamp(((int(message.author.id) >> 22) + 1420070400000) / 1000)
-        embed = discord.Embed(color=0xFF0000)
+        embed = discord.Embed(color=0x0170ed)
         embed.add_field(name="닉네임", value=message.author.name, inline=True)
         embed.add_field(name="서버 닉네임", value=message.author.display_name, inline=True)
         embed.add_field(name="디스코드가입일", value=str(date.year) + "/" + str(date.month) + "/" + str(date.day), inline=True)
@@ -47,13 +47,13 @@ async def on_message(message):
         await message.channel.send(embed=embed)      
 
     if message.content == '!배너문의':
-            embed=discord.Embed(title='배너문의', color=0x64FE2E, timestamp=message.created_at)
+            embed=discord.Embed(title='배너문의', color=0x0170ed, timestamp=message.created_at)
             embed.add_field(name="배너문의", value=f'OOOP!#2036', inline=True)
             embed.set_footer(text=client.user.name, icon_url=client.user.avatar_url)
             await message.channel.send(embed=embed)
             
     if message.content == '!디스코드':
-            embed=discord.Embed(title='Discord', color=0xFF00FF, timestamp=message.created_at)
+            embed=discord.Embed(title='Discord', color=0x0170ed, timestamp=message.created_at)
             embed.add_field(name="디스코드 주소", value=f'https://discord.gg/t5tZUUg', inline=True)
             embed.set_footer(text=client.user.name, icon_url=client.user.avatar_url)
             await message.channel.send(embed=embed)              
