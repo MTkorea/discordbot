@@ -44,13 +44,7 @@ async def on_message(message):
         embed.add_field(name="디스코드가입일", value=str(date.year) + "/" + str(date.month) + "/" + str(date.day), inline=True)
         embed.add_field(name="디스코드주소: discord.gg/t5tZUUg", value=message.author.name + "님 반가워요!", inline=True)
         embed.set_thumbnail(url=message.author.avatar_url)
-        await message.channel.send(embed=embed)
-
-    if message.content == '!배너문의':
-            embed=discord.Embed(title='배너문의', color=0x64FE2E, timestamp=message.created_at)
-            embed.add_field(name="배너문의", value=f'OOOP!#2036', inline=True)
-            embed.set_footer(text=client.user.name, icon_url=client.user.avatar_url)
-            await message.channel.send(embed=embed)       
+        await message.channel.send(embed=embed)      
 
     if message.content == '!배너문의':
             embed=discord.Embed(title='배너문의', color=0x64FE2E, timestamp=message.created_at)
